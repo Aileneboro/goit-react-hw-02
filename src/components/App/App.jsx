@@ -11,11 +11,19 @@ const App = () => {
     bad: 0,
   });
 
-  const updateFeedback = (feedbackType) => {
+  const updateFeedback = (feedbackType, value = 1) => {
     setFeedbackTypes((prevFeedback) => ({
       ...prevFeedback,
-      [feedbackType]: prevFeedback[feedbackType] + 1,
+      [feedbackType]: prevFeedback[feedbackType] + value,
     }));
+  };
+
+  const handleReset = () => {
+    setFeedbackTypes({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    });
   };
 
   const { good, neutral, bad } = feedbackTypes;
@@ -24,7 +32,11 @@ const App = () => {
   return (
     <div>
       <Description />
-      <Options updateFeedback={updateFeedback} />
+      <Options
+        updateFeedback={updateFeedback}
+        totalFeedback={totalFeedback}
+        handleReset={handleReset}
+      />
       {totalFeedback === 0 ? (
         <Notification />
       ) : (
