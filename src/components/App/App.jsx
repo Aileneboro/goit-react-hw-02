@@ -2,6 +2,7 @@ import { useState } from "react";
 import Description from "../Description/Description";
 import Feedback from "../Feedback/Feedback";
 import Options from "../Options/Options";
+import Notification from "../Notification/Notification";
 
 const App = () => {
   const [feedbackTypes, setFeedbackTypes] = useState({
@@ -17,11 +18,18 @@ const App = () => {
     }));
   };
 
+  const { good, neutral, bad } = feedbackTypes;
+  const totalFeedback = good + neutral + bad;
+
   return (
     <div>
       <Description />
       <Options updateFeedback={updateFeedback} />
-      <Feedback feedbackTypes={feedbackTypes} />
+      {totalFeedback === 0 ? (
+        <Notification />
+      ) : (
+        <Feedback feedbackTypes={feedbackTypes} />
+      )}
     </div>
   );
 };
