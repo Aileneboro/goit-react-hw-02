@@ -1,10 +1,10 @@
-const Options = () => {
+const Options = ({ updateFeedback }) => {
   return (
     <div>
       <h2>Options</h2>
-      <button>Good</button>
-      <button>Neutral</button>
-      <button>Bad</button>
+      <button onClick={() => updateFeedback("good")}>Good</button>
+      <button onClick={() => updateFeedback("neutral")}>Neutral</button>
+      <button onClick={() => updateFeedback("bad")}>Bad</button>
     </div>
   );
 };

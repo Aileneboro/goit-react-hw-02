@@ -4,17 +4,23 @@ import Feedback from "../Feedback/Feedback";
 import Options from "../Options/Options";
 
 const App = () => {
-  // Стан для зберігання типів відгуків
   const [feedbackTypes, setFeedbackTypes] = useState({
     good: 0,
     neutral: 0,
     bad: 0,
   });
 
+  const updateFeedback = (feedbackType) => {
+    setFeedbackTypes((prevFeedback) => ({
+      ...prevFeedback,
+      [feedbackType]: prevFeedback[feedbackType] + 1,
+    }));
+  };
+
   return (
     <div>
       <Description />
-      <Options />
+      <Options updateFeedback={updateFeedback} />
       <Feedback feedbackTypes={feedbackTypes} />
     </div>
   );
